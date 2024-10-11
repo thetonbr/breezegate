@@ -1,0 +1,26 @@
+{
+  "port": ":80",
+  "healthCheckInterval": "10s",
+  "domains": [
+      {
+          "domainName": "example.com",
+          "email": "admin@example.com",
+          "useTLS": true,
+          "routes": [
+              {
+                  "path": "/api/v1",
+                  "backend": [
+                      {"url": "http://localhost:8081", "healthy": true},
+                      {"url": "http://localhost:8082", "healthy": true}
+                  ]
+              },
+              {
+                  "path": "/api/v2",
+                  "backend": [
+                      {"url": "http://localhost:8083", "healthy": true}
+                  ]
+              }
+          ]
+      }
+  ]
+}
