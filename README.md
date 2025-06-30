@@ -25,7 +25,7 @@ BreezeGate is a load balancer written in Go designed to handle incoming HTTP/HTT
 1. **Clone the Repository**:
    
    ```bash
-   git clone https://github.com/your-username/breezegate.git
+   git clone https://github.com/thetonbr/breezegate.git
    cd breezegate
    ```
    
