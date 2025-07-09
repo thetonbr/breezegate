@@ -1,3 +1,9 @@
+## 1.0.0 (2025-07-09)
+
+### ✨ Features
+
+* **ci:** add semantic release automation ([8b8ad9a](https://github.com/thetonbr/breezegate/commit/8b8ad9acfda5c97d75c4e4d8c07b346abe892bba))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
