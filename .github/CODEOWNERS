@@ -1,0 +1,30 @@
+# CODEOWNERS file for BreezeGate
+# This file defines who is responsible for code in this repository.
+# These owners will be the default reviewers for pull requests.
+
+# Default owners for everything in the repo
+* @thetonbr
+
+# Core components
+/internal/domain/ @thetonbr
+/internal/services/ @thetonbr
+/internal/handlers/ @thetonbr
+
+# Configuration and deployment
+/internal/config/ @thetonbr
+/.github/ @thetonbr
+/Dockerfile* @thetonbr
+/docker-compose.yml @thetonbr
+
+# Documentation
+/README.md @thetonbr
+/CONTRIBUTING.md @thetonbr
+/SECURITY.md @thetonbr
+/docs/ @thetonbr
+
+# CI/CD
+/.github/workflows/ @thetonbr
+
+# Dependencies
+/go.mod @thetonbr
+/go.sum @thetonbr

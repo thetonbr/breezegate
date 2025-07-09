@@ -8,25 +8,75 @@
 # Test binary, built with `go test -c`
 *.test
 
-# Output of the go coverage tool, specifically when used with LiteIDE
+# Output of the go coverage tool
 *.out
+coverage.html
+coverage.txt
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Dependency directories
+vendor/
 
 # Go workspace file
 go.work
 go.work.sum
 
-# env file
-.env
-
-# Other files
-.DStore
-
-# Build files
+# Build directories
 build/
 dist/
+bin/
 
-# Test Files
-coverage.*
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Certificates and keys
+*.pem
+*.key
+*.crt
+*.csr
+
+# Configuration files with secrets
+config.local.json
+config.prod.json
+config.staging.json
+
+# Log files
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Application specific
+breezegate
+breezegate-*
+
+# Debug files
+debug
+__debug_bin
+
+# Profiling files
+*.prof
+*.mem
+*.cpu
+
+# Local configuration overrides
+config.override.json
+
+# Backup files
+*.backup
+*.bak
+
+# Test artifacts
+test-results/
+test-reports/
