@@ -4,10 +4,10 @@ run:
   modules-download-mode: readonly
 
 output:
-  format: colored-line-number
+  formats:
+    - format: colored-line-number
   print-issued-lines: true
   print-linter-name: true
-  uniq-by-line: true
   path-prefix: ""
   sort-results: true
 
@@ -24,10 +24,11 @@ linters-settings:
     min-complexity: 15
   gocyclo:
     min-complexity: 15
-  golint:
-    min-confidence: 0
+  revive:
+    rules:
+      - name: exported
+        severity: warning
   govet:
-    check-shadowing: true
     settings:
       printf:
         funcs:
@@ -35,14 +36,17 @@ linters-settings:
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
           - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
+    enable:
+      - shadow
   lll:
     line-length: 120
-  maligned:
-    suggest-new: true
+  gosmopolitan:
+    allow-time-local: false
+    escape-hatches:
+      - '*.time_test.go'
   misspell:
     locale: US
   nolintlint:
-    allow-leading-space: true
     allow-unused: false
     require-explanation: false
     require-specific: false
@@ -102,7 +106,7 @@ issues:
   exclude-rules:
     - path: _test\.go
       linters:
-        - gomnd
+        - mnd
         - funlen
         - gocyclo
         - gocognit
