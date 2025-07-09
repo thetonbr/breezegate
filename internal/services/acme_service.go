@@ -1,19 +1,22 @@
 /*
 Package services provides ACME (Let's Encrypt) integration using the lego library.
 */
-
 package services
 
 import (
 	"crypto"
 	"crypto/tls"
-	"io/ioutil"
+	"os"
 
 	"github.com/go-acme/lego/v4/certcrypto"
 	"github.com/go-acme/lego/v4/certificate"
 	"github.com/go-acme/lego/v4/lego"
 	"github.com/go-acme/lego/v4/providers/dns/cloudflare"
 	"github.com/go-acme/lego/v4/registration"
+)
+
+const (
+	certFilePermissions = 0o600
 )
 
 // ACMEClient manages Let's Encrypt certificates using the ACME protocol.
@@ -45,7 +48,7 @@ func (u *User) GetPrivateKey() crypto.PrivateKey {
 }
 
 // NewACMEClient creates a new ACMEClient for the specified email and domain.
-func NewACMEClient(email, domain string) (*ACMEClient, error) {
+func NewACMEClient(email, _ string) (*ACMEClient, error) {
 	privateKey, err := certcrypto.GeneratePrivateKey(certcrypto.RSA2048)
 	if err != nil {
 		return nil, err
@@ -100,12 +103,12 @@ func (ac *ACMEClient) ObtainCertificate(domain string) (*tls.Certificate, error)
 	}
 
 	// Save certificates to disk
-	err = ioutil.WriteFile(domain+".crt", certificates.Certificate, 0600)
+	err = os.WriteFile(domain+".crt", certificates.Certificate, certFilePermissions)
 	if err != nil {
 		return nil, err
 	}
 
-	err = ioutil.WriteFile(domain+".key", certificates.PrivateKey, 0600)
+	err = os.WriteFile(domain+".key", certificates.PrivateKey, certFilePermissions)
 	if err != nil {
 		return nil, err
 	}

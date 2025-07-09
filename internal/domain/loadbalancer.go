@@ -1,7 +1,6 @@
 /*
 Package domain contains the core logic for the load balancer, including routing and server management.
 */
-
 package domain
 
 import (

@@ -20,7 +20,7 @@ func TestHealthCheck(t *testing.T) {
 		{
 			name: "Healthy Server",
 			serverFunc: func() *httptest.Server {
-				return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 					w.WriteHeader(http.StatusOK)
 				}))
 			},
@@ -29,7 +29,7 @@ func TestHealthCheck(t *testing.T) {
 		{
 			name: "Unhealthy Server",
 			serverFunc: func() *httptest.Server {
-				return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 					w.WriteHeader(http.StatusInternalServerError)
 				}))
 			},

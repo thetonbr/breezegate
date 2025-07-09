@@ -8,7 +8,10 @@ import (
 )
 
 func newTestServer(host string, healthy bool) *domain.Server {
-	u, _ := url.Parse(host)
+	u, err := url.Parse(host)
+	if err != nil {
+		panic(err)
+	}
 	return &domain.Server{
 		URL:       u,
 		IsHealthy: healthy,

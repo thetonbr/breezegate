@@ -2,6 +2,7 @@
 Package config handles loading and parsing configuration files for BreezeGate.
 */
 
+// Package config provides configuration management for the BreezeGate Load Balancer.
 package config
 
 import (

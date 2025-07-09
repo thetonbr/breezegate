@@ -2,7 +2,6 @@
 Package main is the entry point for the BreezeGate Load Balancer.
 It loads configurations, initializes servers, and handles HTTP/HTTPS requests with Let's Encrypt TLS support.
 */
-
 package main
 
 import (
@@ -14,6 +13,11 @@ import (
 	"github.com/thetonbr/breezegate/internal/domain"
 	"github.com/thetonbr/breezegate/internal/handlers"
 	"github.com/thetonbr/breezegate/internal/services"
+)
+
+const (
+	defaultReadTimeout  = 30 * time.Second
+	defaultWriteTimeout = 30 * time.Second
 )
 
 // main initializes the load balancer, loads configurations, and starts the HTTP/HTTPS servers.
@@ -39,7 +43,10 @@ func main() {
 				backends = append(backends, server)
 
 				// Start health checks for each backend server
-				healthCheckInterval, _ := time.ParseDuration(cfg.HealthCheckInterval)
+				healthCheckInterval, err := time.ParseDuration(cfg.HealthCheckInterval)
+				if err != nil {
+					log.Fatalf("Error parsing health check interval: %s", err.Error())
+				}
 				go services.HealthCheck(server, healthCheckInterval)
 			}
 			lb.AddRoute(route.Path, backends)
@@ -63,7 +70,13 @@ func main() {
 			// Start HTTP server
 			go func() {
 				log.Printf("Starting HTTP server for domain %s on port %s", domainConfig.DomainName, cfg.Port)
-				err := http.ListenAndServe(cfg.Port, lbHandler)
+				server := &http.Server{
+					Addr:         cfg.Port,
+					Handler:      lbHandler,
+					ReadTimeout:  defaultReadTimeout,
+					WriteTimeout: defaultWriteTimeout,
+				}
+				err := server.ListenAndServe()
 				if err != nil {
 					log.Fatalf("Error starting HTTP server: %s\n", err.Error())
 				}
