@@ -290,7 +290,20 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ### Contributing
 
-We welcome contributions! Please open an issue or submit a pull request if you have any improvements or bug fixes.
+We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+#### Commit Convention
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) for automatic semantic versioning. Please ensure your commits follow the format:
+
+```
+<type>(<scope>): <subject>
+```
+
+Examples:
+- `feat(api): add new endpoint for health checks`
+- `fix(loadbalancer): resolve memory leak in connection pool`
+- `docs(readme): update installation instructions`
 
 Feel free to suggest additional features in the issue tracker or help us improve the code quality by submitting a pull request!
 

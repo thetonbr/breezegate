@@ -107,21 +107,61 @@ make lint
 
 ### Git Commit Messages
 
-* Use the present tense ("Add feature" not "Added feature")
-* Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
-* Limit the first line to 72 characters or less
-* Reference issues and pull requests liberally after the first line
-* When only changing documentation, include `[ci skip]` in the commit title
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for automatic semantic versioning:
 
-Example:
 ```
-Add Prometheus metrics endpoint
+<type>(<scope>): <subject>
 
-- Add /metrics endpoint for Prometheus scraping
-- Include request rate, error rate, and latency metrics
-- Add configuration option to enable/disable metrics
+<body>
 
-Fixes #123
+<footer>
+```
+
+#### Types
+- `feat`: New feature (triggers minor release)
+- `fix`: Bug fix (triggers patch release)
+- `docs`: Documentation changes (no release unless scope is README)
+- `style`: Code style changes (no release)
+- `refactor`: Code refactoring (no release)
+- `perf`: Performance improvements (triggers patch release)
+- `test`: Test changes (no release)
+- `build`: Build system changes (no release)
+- `ci`: CI configuration changes (no release)
+- `chore`: Other changes (no release)
+- `revert`: Reverts a previous commit (triggers patch release)
+
+#### Breaking Changes
+- Add `BREAKING CHANGE:` in the commit body or footer
+- Or add `!` after the type: `feat!: breaking change`
+- This triggers a major version release
+
+#### Examples
+
+```
+feat(loadbalancer): add weighted round-robin algorithm
+
+Implement weighted round-robin load balancing to allow
+different weights for backend servers based on their capacity.
+
+Closes #45
+```
+
+```
+fix(healthcheck): prevent goroutine leak on shutdown
+
+Add proper context cancellation to health check goroutines
+to ensure they terminate when the application shuts down.
+
+Fixes #78
+```
+
+```
+feat!: change config file format to YAML
+
+BREAKING CHANGE: Configuration files must now be in YAML format.
+JSON configuration files are no longer supported.
+
+Migration guide: https://docs.breezegate.dev/migration/v2
 ```
 
 ### Go Styleguide
